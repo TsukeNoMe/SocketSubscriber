@@ -1,0 +1,25 @@
+﻿<p>Updates:</p>
+<p id="broadCasts">
+
+
+</p>
+
+
+<script type="text/javascript">
+    $(function () {
+
+            var Updates = $.connection.publisherHub;
+            Updates.client.broadcastMessage = function (message) {
+
+                if ($("#broadCasts").children().length > 20)
+                    $("#broadCasts").html("");
+
+                $("#broadCasts").append('<p class="bg-info" >' + message + '</p >');
+                console.log(message);
+                
+            };
+            $.connection.hub.start().done(function () {
+                Updates.server.startUpdates();
+            });
+        });
+</script>
